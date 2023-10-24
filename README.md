@@ -1,4 +1,4 @@
-# Questions of to the practice
+# Lucas BARREAU - Questions of to the practice
 
 - Why should we run the container with a flag -e to give the environment variables?
 
