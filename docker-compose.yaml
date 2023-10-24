@@ -1,0 +1,41 @@
+version: '3.7'
+services:
+  app:
+    container_name: "tp-app"
+    #build:
+    #  context: project
+    image: lucasbarreau/tp_app:1.0.0
+    networks:
+      - app-network
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+
+
+  db:
+    container_name: "tp-db"
+    #build:
+    #  context: db
+    image: lucasbarreau/tp_db:1.0.0
+    networks:
+      - app-network
+    volumes:
+      - /sql:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  httpd:
+    #build:
+    #  context: project/apache
+    image: lucasbarreau/tp_httpd:1.0.0
+    ports:
+      - "81:80"
+    depends_on:
+      - app
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
