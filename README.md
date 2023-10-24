@@ -39,12 +39,12 @@ filesystem. It protects data from being wiped out during container rebuilding. I
 To run adminer it's nearly the same commands :
 ```bash
 $ docker build -t tp-adminer adminer/.
-$ docker run -d -p 88080:8080 --net=tp-app-network --name=tp-adminer tp-adminer
+$ docker run -d -p 8090:8080 --net=tp-app-network --name=tp-adminer tp-adminer
 
 ```
 
 
-You can now connect to your app on ip : http://localhost:88080
+You can now connect to your app on ip : http://localhost:8090
 Log with your credentials.
 
 **1-2 Why do we need a multistage build? And explain each step of this dockerfile.**
@@ -100,6 +100,7 @@ This Docker Compose file creates three services on a network named "app-network.
     - Builds from the "project" directory using its Dockerfile.
     - Exposes port 8080 on the host.
     - Depends on the "db" service.
+
 ***db:***
     - Container name: "tp-db"
     - Builds from the "db" directory using its Dockerfile.
