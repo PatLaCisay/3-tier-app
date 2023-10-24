@@ -114,3 +114,19 @@ This Docker Compose file creates three services on a network named "app-network.
 
 The services are all part of the "app-network" for communication. The "app-network" is a bridge network.
 
+**1-5 Document your publication commands and published images in dockerhub.**
+
+The "tag" argument gives a tag to the local image. After using :
+```bash
+$ docker login
+```
+To log to your DockerHub account. After that the push command publish your image into DockerHub.
+You can afterward change the version tag to update your image if you want.
+
+As you can see in the docker-compose.yaml we commented the previous "context/build" and use our 
+freshly published image.
+
+- Why do we put our images into an online repo?
+
+If another dev wants to use our images, he just have to pull them from DockerHub and won't have to 
+build them again. This process saves time, a crucial factor of the following practice : pipelines.
