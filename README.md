@@ -113,7 +113,8 @@ This Docker Compose file creates three services on a network named "app-network.
     - Exposes port 80 in the container but doesn't map it to the host.
     - Depends on the "app" service.
 
-The services are all part of the "app-network" for communication. The "app-network" is a bridge network.
+The services are all part of the "app-network" for communication. The "app-network" is a bridge 
+network.
 
 **1-5 Document your publication commands and published images in dockerhub.**
 
@@ -136,5 +137,33 @@ build them again. This process saves time, a crucial factor of the following pra
 
 **2-1 What are testcontainers?**
 
-Test containers are java libs that allows you to run bunch of containers to test your app.
+Test containers are java libs that allows you to run a bunch of containers to test your app.
+
+**2-2 Document your Github Actions configurations.**
+
+***Events Triggering CI Jobs:***
+
+- When code is pushed to the repository, specifically on the "main" and "develop" branches.
+- When pull requests are created or updated.
+
+***Jobs:***
+
+- One job named "test-backend" is defined.
+- Job Details:
+
+The "test-backend" job will run on an Ubuntu 22.04 operating system.
+
+***Job Steps:***
+
+ - 1 Checkout Code:
+    - Uses the "actions/checkout" action to fetch the code from the GitHub repository.
+ - 2 Set up JDK 17:
+    - Uses the "actions/setup-java" action to set up Java Development Kit (JDK) version 17 from the 
+      "adopt" distribution.
+ - 3 Build and Test with Maven:
+    - Changes the working directory to a directory called "project."
+    - Executes the "mvn clean verify" command, typically used for building and testing Java projects
+      with Apache Maven.
+ 
+
 
