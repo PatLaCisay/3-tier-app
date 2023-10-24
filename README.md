@@ -1,5 +1,6 @@
 # Lucas BARREAU - Questions of to the practice
 
+## Docker practice
 - Why should we run the container with a flag -e to give the environment variables?
 
 Environnements variables often contains critical informations that are not meant to be written in readable files.
@@ -130,3 +131,10 @@ freshly published image.
 
 If another dev wants to use our images, he just have to pull them from DockerHub and won't have to 
 build them again. This process saves time, a crucial factor of the following practice : pipelines.
+
+## GitHub action practice
+
+**2-1 What are testcontainers?**
+
+Test containers are java libs that allows you to run bunch of containers to test your app.
+
