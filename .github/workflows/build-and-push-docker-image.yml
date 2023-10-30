@@ -1,12 +1,13 @@
-name: CI devops 2023 - test backend
+name: CI devops 2023 - build-and-push-docker-image
 on:
+  push:
+    branches:
+      - main
   workflow_run:
     workflows: [ CI devops 2023 - test backend ]
     types:
       - completed
-  push:
-    branches:
-      - main
+
 
   pull_request:
 
@@ -15,6 +16,7 @@ jobs:
     needs: test-backend
     # run only when code is compiling and tests are passing
     runs-on: ubuntu-22.04
+    if: github.ref == 'refs/heads/main'
 
     # steps to perform in job
     steps:
