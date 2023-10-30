@@ -164,6 +164,41 @@ The "test-backend" job will run on an Ubuntu 22.04 operating system.
     - Changes the working directory to a directory called "project."
     - Executes the "mvn clean verify" command, typically used for building and testing Java projects
       with Apache Maven.
+  
  
+- Secured Variables, why?
+
+The Dockerhub credentials are critical data. If they are in clear in the code and the repo is public,
+a malicious person might use them to connect to your Dockerhub account. Using Github secrets is a good
+practice to hide them.
+
+- Why did we put needs: test-backend on this job?
+
+We can't build an app that tests have not succeeded. That's why we put this "need" parameter.
+
+- For what purpose do we need to push docker images?
+
+If a dev want's to test our app, it's more convenient if images are already build. It's saving his/her
+time.
+
+**2-3 Document your quality gate configuration.**
+
+Overview of the Quality Gate data :
+
+   - Quality Gate: Passed
+   - Code Smells: 0
+   - Bugs: 0
+   - Vulnerabilities: 2
+   - Security Hotspots: 3
+   - Coverage: 0.0%
+   - Duplications: 0
+   - Latest Analysis (Main Branch): Passed
+   - Last Analysis: 30th October 2023
+
+The Quality Gate passed, indicating good code quality with no code smells or bugs. However, there 
+are 2 vulnerabilities and 3 security hotspots. Code coverage is at 0%, and there are no code 
+duplications. The latest analysis on the main branch passed on October 30, 2023.
+
+
 
 
