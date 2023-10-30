@@ -49,7 +49,7 @@ jobs:
           # relative path to the place where source code with Dockerfile is located
           context: ./project
           # Note: tags has to be all lower-case
-          tags:  ${{secrets.DOCKER_USERNAME}}/tp_app
+          tags:  ${{secrets.DOCKER_USERNAME}}/tp-app:1.0.2
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
 
@@ -59,7 +59,7 @@ jobs:
           # relative path to the place where source code with Dockerfile is located
           context: ./db
           # Note: tags has to be all lower-case
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/tp_db
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/tp-db:1.0.2
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
 
@@ -71,7 +71,7 @@ jobs:
           # relative path to the place where source code with Dockerfile is located
           context: ./project/apache
           # Note: tags has to be all lower-case
-          tags: ${{secrets.DOCKER_USERNAME}}/tp_httpd
+          tags: ${{secrets.DOCKER_USERNAME}}/tp-httpd:1.0.2
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
 
