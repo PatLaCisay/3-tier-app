@@ -25,9 +25,9 @@ services:
       - "5432:5432"
 
   httpd:
-    build:
-      context: project/apache
-    #image: lucasbarreau/tp-httpd:1.0.2
+    #build:
+    #  context: project/apache
+    image: lucasbarreau/tp-httpd:1.0.2
     ports:
       - "81:80"
     depends_on:
