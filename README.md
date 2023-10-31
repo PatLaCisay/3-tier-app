@@ -199,6 +199,64 @@ The Quality Gate passed, indicating good code quality with no code smells or bug
 are 2 vulnerabilities and 3 security hotspots. Code coverage is at 0%, and there are no code 
 duplications. The latest analysis on the main branch passed on October 30, 2023.
 
+## Ansible
+
+**3-1 Document your inventory and base commands**
+
+This first command uses the basic setup config to test the connection to the server.
+```bash
+$ ansible all -i ansible/inventories/setup.yml -m ping
+```
+Ping results :
+```
+lbarreau.takima.cloud | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+
+```
+This second command shows the OS of the server's machine.
+```bash
+$ ansible all -i ansible/inventories/setup.yml -m setup -a "filter=ansible_distribution*"
+lbarreau.takima.cloud | SUCCESS => {
+    "ansible_facts": {
+        "ansible_distribution": "CentOS",
+        "ansible_distribution_file_parsed": true,
+        "ansible_distribution_file_path": "/etc/redhat-release",
+        "ansible_distribution_file_variety": "RedHat",
+        "ansible_distribution_major_version": "7",
+        "ansible_distribution_release": "Core",
+        "ansible_distribution_version": "7.9",
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false
+}
+
+```
+This third command resets the Apache http server installed in the server.
+```bash
+$ ansible all -i ansible/inventories/setup.yml -m yum -a "name=httpd state=absent" --become
+```
+Apache :
+```JSON
+lbarreau.takima.cloud | SUCCESS => {
+    "ansible_facts": {
+      "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "msg": "",
+    "rc": 0,
+    "results": [
+    "httpd is not installed"
+    ]
+}
+
+
+```
+
 
 
 
