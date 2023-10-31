@@ -4,8 +4,9 @@ name: Deploy with Ansible
 
 on:
   workflow_run:
-    workflows: ["CI devops 2023 - build-and-push-docker-image"]
-    branches: [main]
+    workflows: [ CI devops 2023 - build-and-push-docker-image ]
+    branches:
+      - main
     types:
       - completed
 
