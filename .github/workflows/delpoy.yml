@@ -1,0 +1,41 @@
+---
+# tasks file for roles/deploy
+name: Deploy with Ansible
+
+on:
+  workflow_run:
+    workflows: ["CI devops 2023 - build-and-push-docker-image"]
+    branches: [main]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa_tp_devops
+          chmod 600 ~/.ssh/id_rsa_tp_devops
+          ssh-keyscan lbarreau.takima.cloud >> ~/.ssh/known_hosts
+
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install Ansible
+        run: |
+          sudo apt update
+          sudo apt install -y ansible
+        continue-on-error: true
+
+      - name: Run Ansible Playbook
+        run: |
+          cd ansible
+          ansible-playbook -i inventories/setup.yml playbook.yml
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: False
