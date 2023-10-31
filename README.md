@@ -257,6 +257,29 @@ lbarreau.takima.cloud | SUCCESS => {
 
 ```
 
+**3-2 Document your playbook**
 
+### Installing Docker on CentOS
 
+This Ansible playbook is used to install Docker on CentOS. It consists of the following tasks:
+
+- ***Role Inclusion***:
+    - The playbook starts by including the "docker" role. This role is expected to contain Docker-related tasks, making the playbook more modular and organized.
+
+- ***Install device-mapper-persistent-data***:
+    - In this task, the `yum` module is used to install the "device-mapper-persistent-data" package. It ensures that this essential package is up to date.
+
+- ***Install lvm2***:
+    - The "Install lvm2" task utilizes the `yum` module to install the "lvm2" package, ensuring it is in the latest state.
+
+- ***Add Docker Repository***:
+    - The "add repo docker" task employs the `command` module to add the Docker repository for CentOS. It configures the system to fetch Docker packages from the specified repository URL.
+
+- ***Install Docker***:
+    - In the "Install Docker" task, the `yum` module is used to install the "docker-ce" package. This step brings Docker to the system, ensuring it is present.
+
+- ***Make sure Docker is running***:
+    - The last task, "Make sure Docker is running," uses the `service` module to ensure that the Docker service is started and set to run automatically during system boot. It uses the "docker" tag for easy categorization.
+
+This playbook simplifies the process of installing Docker on CentOS distrib, making use of roles for better organization and ensuring that the required dependencies and services are set up correctly.
 

@@ -1,0 +1,12 @@
+---
+# tasks file for roles/app_server
+
+- name: Start the Application Container
+  docker_container:
+    name: app
+    image: lucasbarreau/tp-app:1.0.2
+    state: started
+    networks:
+      - name: app_network
+    pull: true
+  become: yes

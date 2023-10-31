@@ -1,0 +1,13 @@
+---
+# tasks file for roles/db_server
+- name: Start the Database Container
+  docker_container:
+    name: tp-db
+    image: lucasbarreau/tp-db:1.0.2
+    state: started
+    networks:
+      - name: app_network
+    env:
+      POSTGRES_PASSWORD: "pwd"
+    pull: true
+  become: yes
