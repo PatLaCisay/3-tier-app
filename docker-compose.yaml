@@ -12,7 +12,6 @@ services:
     ports:
       - "8080:8080"
 
-
   db:
     container_name: "tp-db"
     #build:
@@ -26,11 +25,21 @@ services:
       - "5432:5432"
 
   httpd:
-    #build:
-    #  context: project/apache
-    image: lucasbarreau/tp-httpd:1.0.2
+    build:
+      context: project/apache
+    #image: lucasbarreau/tp-httpd:1.0.2
     ports:
-      - "80:80"
+      - "81:80"
+    depends_on:
+      - app
+    networks:
+      - app-network
+
+  frontend:
+    container_name: "frontend"
+    build: devops-front-main/
+    ports:
+      - "82:80"
     depends_on:
       - app
     networks:

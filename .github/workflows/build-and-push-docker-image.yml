@@ -55,6 +55,15 @@ jobs:
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
 
+      - name: Build image and push frontend
+        uses: docker/build-push-action@v3
+        with:
+          # relative path to the place where source code with Dockerfile is located
+          context: ./devops-front-main
+          # Note: tags has to be all lower-case
+          tags: ${{secrets.DOCKER_USERNAME}}/tp-frontend:1.0.2
+          # build on feature branches, push only on main branch
+          push: ${{ github.ref == 'refs/heads/main' }}
 
 
 
