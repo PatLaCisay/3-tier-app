@@ -1,0 +1,11 @@
+---
+# tasks file for roles/frontend-app
+- name: Start the Front-end
+  docker_container:
+    name: frontend
+    image: lucasbarreau/tp-frontend:1.0.2
+    state: started
+    networks:
+      - name: app_network
+    pull: true
+  become: yes
