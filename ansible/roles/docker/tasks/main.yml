@@ -1,0 +1,41 @@
+---
+# tasks file for roles/docker
+
+- name: Install required dependencies
+  yum:
+    name:
+      - device-mapper-persistent-data
+      - lvm2
+      - python3
+      - python3-pip
+    state: latest
+  tags:
+    - docker
+
+- name: Add Docker repository
+  command:
+    cmd: sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+  tags:
+    - docker
+
+- name: Install Docker
+  yum:
+    name: docker-ce
+    state: present
+  tags:
+    - docker
+
+- name: Install the Docker Python module
+  pip:
+    name: docker
+    executable: pip3
+  tags:
+    - docker
+
+- name: Start and enable the Docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes
+  tags:
+    - docker

@@ -1,0 +1,16 @@
+- name: Deploy Your Application
+  hosts: all
+  become: yes
+  gather_facts: false
+
+  roles:
+    - docker
+    - app_network
+    - db_server
+    - web_server
+    - app_server
+
+
+
+
+

@@ -1,0 +1,6 @@
+---
+# tasks file for roles/app_network
+- name: Create the Docker network
+  docker_network:
+    name: app_network
+  become: yes

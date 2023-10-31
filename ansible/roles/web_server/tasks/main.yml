@@ -1,0 +1,14 @@
+---
+# tasks file for roles/web_server
+
+- name: Start the Web Container
+  docker_container:
+    name: tp-httpd
+    image: lucasbarreau/tp-httpd:1.0.2
+    state: started
+    ports:
+      - "80:80"
+    networks:
+      - name: app_network
+    pull: true
+  become: yes

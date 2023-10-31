@@ -199,6 +199,87 @@ The Quality Gate passed, indicating good code quality with no code smells or bug
 are 2 vulnerabilities and 3 security hotspots. Code coverage is at 0%, and there are no code 
 duplications. The latest analysis on the main branch passed on October 30, 2023.
 
+## Ansible
+
+**3-1 Document your inventory and base commands**
+
+This first command uses the basic setup config to test the connection to the server.
+```bash
+$ ansible all -i ansible/inventories/setup.yml -m ping
+```
+Ping results :
+```
+lbarreau.takima.cloud | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+
+```
+This second command shows the OS of the server's machine.
+```bash
+$ ansible all -i ansible/inventories/setup.yml -m setup -a "filter=ansible_distribution*"
+lbarreau.takima.cloud | SUCCESS => {
+    "ansible_facts": {
+        "ansible_distribution": "CentOS",
+        "ansible_distribution_file_parsed": true,
+        "ansible_distribution_file_path": "/etc/redhat-release",
+        "ansible_distribution_file_variety": "RedHat",
+        "ansible_distribution_major_version": "7",
+        "ansible_distribution_release": "Core",
+        "ansible_distribution_version": "7.9",
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false
+}
+
+```
+This third command resets the Apache http server installed in the server.
+```bash
+$ ansible all -i ansible/inventories/setup.yml -m yum -a "name=httpd state=absent" --become
+```
+Apache :
+```JSON
+lbarreau.takima.cloud | SUCCESS => {
+    "ansible_facts": {
+      "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "msg": "",
+    "rc": 0,
+    "results": [
+    "httpd is not installed"
+    ]
+}
 
 
+```
+
+**3-2 Document your playbook**
+
+### Installing Docker on CentOS
+
+This Ansible playbook is used to install Docker on CentOS. It consists of the following tasks:
+
+- ***Role Inclusion***:
+    - The playbook starts by including the "docker" role. This role is expected to contain Docker-related tasks, making the playbook more modular and organized.
+
+- ***Install device-mapper-persistent-data***:
+    - In this task, the `yum` module is used to install the "device-mapper-persistent-data" package. It ensures that this essential package is up to date.
+
+- ***Install lvm2***:
+    - The "Install lvm2" task utilizes the `yum` module to install the "lvm2" package, ensuring it is in the latest state.
+
+- ***Add Docker Repository***:
+    - The "add repo docker" task employs the `command` module to add the Docker repository for CentOS. It configures the system to fetch Docker packages from the specified repository URL.
+
+- ***Install Docker***:
+    - In the "Install Docker" task, the `yum` module is used to install the "docker-ce" package. This step brings Docker to the system, ensuring it is present.
+
+- ***Make sure Docker is running***:
+    - The last task, "Make sure Docker is running," uses the `service` module to ensure that the Docker service is started and set to run automatically during system boot. It uses the "docker" tag for easy categorization.
+
+This playbook simplifies the process of installing Docker on CentOS distrib, making use of roles for better organization and ensuring that the required dependencies and services are set up correctly.
 

@@ -4,7 +4,7 @@ services:
     container_name: "tp-app"
     #build:
     #  context: project
-    image: lucasbarreau/tp_app:1.0.0
+    image: lucasbarreau/tp-app:1.0.2
     networks:
       - app-network
     depends_on:
@@ -17,7 +17,7 @@ services:
     container_name: "tp-db"
     #build:
     #  context: db
-    image: lucasbarreau/tp_db:1.0.0
+    image: lucasbarreau/tp-db:1.0.2
     networks:
       - app-network
     volumes:
@@ -28,9 +28,9 @@ services:
   httpd:
     #build:
     #  context: project/apache
-    image: lucasbarreau/tp_httpd:1.0.0
+    image: lucasbarreau/tp-httpd:1.0.2
     ports:
-      - "81:80"
+      - "80:80"
     depends_on:
       - app
     networks:
