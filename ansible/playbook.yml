@@ -9,6 +9,7 @@
     - db_server
     - web_server
     - app_server
+    - frontend-app
 
 
 
