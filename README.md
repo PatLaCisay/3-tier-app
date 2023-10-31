@@ -283,3 +283,7 @@ This Ansible playbook is used to install Docker on CentOS. It consists of the fo
 
 This playbook simplifies the process of installing Docker on CentOS distrib, making use of roles for better organization and ensuring that the required dependencies and services are set up correctly.
 
+**3-4 Document your docker_container tasks configuration.**
+
+Each docker_container task configuration works the same way has a docker-compose service.
+
