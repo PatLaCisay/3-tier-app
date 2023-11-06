@@ -286,4 +286,13 @@ This playbook simplifies the process of installing Docker on CentOS distrib, mak
 **3-4 Document your docker_container tasks configuration.**
 
 Each docker_container task configuration works the same way has a docker-compose service.
-
+We can take as example the Application Container build task :
+- name: Start the Application Container #name of the task
+  docker_container:
+    name: app #container's name
+    image: lucasbarreau/tp-app:1.0.2 #container's image
+    state: started #state
+    networks:
+      - name: app_network #network
+    pull: true #this parameter force pulls the image 
+  become: yes #execute the commands with root privilege
