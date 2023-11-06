@@ -287,6 +287,8 @@ This playbook simplifies the process of installing Docker on CentOS distrib, mak
 
 Each docker_container task configuration works the same way has a docker-compose service.
 We can take as example the Application Container build task :
+
+```yml
 - name: Start the Application Container #name of the task
   docker_container:
     name: app #container's name
@@ -296,3 +298,4 @@ We can take as example the Application Container build task :
       - name: app_network #network
     pull: true #this parameter force pulls the image 
   become: yes #execute the commands with root privilege
+```
